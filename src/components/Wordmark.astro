@@ -12,6 +12,11 @@ const { light = false } = Astro.props;
   </svg>
   <span class="flex flex-col leading-none">
     <span class="font-serif text-[1.5rem] font-semibold tracking-tight">Vietmeier</span>
-    <span class:list={['mt-1 text-[0.9rem] font-bold tracking-[0.06em] uppercase', light ? 'text-paper/90' : 'text-ink-soft']}>Insurance, McKees Rocks</span>
+    <span class:list={['mt-1 text-[0.9rem] font-bold tracking-[0.06em] uppercase', light ? 'text-paper/90' : 'text-ink-soft']}>Insurance<span class="place">, McKees Rocks</span></span>
   </span>
 </a>
+<style>
+  @media (max-width: 26rem) {
+    :global(html[data-size='xl']) .place { display: none; }
+  }
+</style>
