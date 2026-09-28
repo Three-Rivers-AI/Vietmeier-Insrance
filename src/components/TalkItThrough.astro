@@ -1,0 +1,23 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+// Every page ends the same way.
+---
+<section class="section-pad bg-river text-paper on-dark" aria-labelledby="talk-heading">
+  <div class="wrap grid items-center gap-10 md:grid-cols-[1.4fr_1fr]" data-reveal>
+    <div>
+      <h2 id="talk-heading" class="text-paper">Talk it through with a person.</h2>
+      <p class="mt-4 max-w-[36rem] text-paper/90">
+        Fifteen minutes on the phone, or a cup of coffee at your kitchen table. Bring your questions and the mail you have not opened. You leave with a plan, and no one calls you back unless you ask.
+      </p>
+    </div>
+    <div class="flex flex-col gap-4 sm:flex-row md:flex-col">
+      <a href={`tel:${site.phoneTel}`} class="btn btn-light text-[1.25rem]">
+        <Icon name="phone" /> Call {site.phoneShort}
+      </a>
+      <a href={site.bookHref} class="btn btn-outline-light text-[1.25rem]">
+        <Icon name="calendar" /> Book a 15-minute call
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import { site } from '../data/site';
+---
+<Base title="Privacy" description="How Vietmeier Insurance handles your information: used only to contact you, never sold or shared.">
+  <PageHeader eyebrow="Privacy" title="Your information is used to contact you. That is all." intro="Placeholder policy for a concept site. Have it reviewed before launch." />
+  <Prose heading="What I collect.">
+    <p>If you fill out the contact form, I get your name, phone number, zip code, the time you like to be called, and what you would like help with. Email is optional.</p>
+    <p>I never ask for your Medicare number, Social Security number, date of birth, medications or health conditions on this website.</p>
+  </Prose>
+  <Prose heading="How I use it." tone="sage">
+    <p>Your information is used only to contact you about the products you selected. It is never sold or shared with anyone else.</p>
+    <p>You can ask me to delete it at any time by calling {site.phoneShort} or emailing <span class="[overflow-wrap:anywhere]">{site.email}</span>.</p>
+  </Prose>
+  <Prose heading="What this site does not do.">
+    <ul>
+      <li>No analytics, no ad pixels, no tracking cookies.</li>
+      <li>The text-size setting is saved only in your own browser.</li>
+      <li>No map embeds or social media widgets that follow you around.</li>
+    </ul>
+    <p>Last updated: [date]. Questions? Call {site.phoneShort}.</p>
+  </Prose>
+</Base>

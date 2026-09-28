@@ -1,0 +1,35 @@
+---
+/*
+ * Required Medicare Advantage / Part D disclaimer.
+ * Wording per 42 CFR 422.2267(e)(41), as read on eCFR 2026-09-28:
+ * https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-422/subpart-V/section-422.2267
+ * (text pulled from https://www.ecfr.gov/api/versioner/v1/full/2026-08-13/title-42.xml?part=422&section=422.2267,
+ * last amended 91 FR 17583, Apr. 6, 2026). This is the version for an agent who does NOT sell for every
+ * MA organization in the area. If he does, the rule gives different wording. It must also be said on
+ * sales calls before benefits are discussed and included in emails and chats.
+ * TODO before launch: re-check the current eCFR text and fill in the bracketed counts.
+ * This is the single source for the disclaimer. Do not copy the text anywhere else.
+ */
+interface Props {
+  variant?: 'box' | 'footer' | 'inline';
+}
+const { variant = 'inline' } = Astro.props;
+
+const orgCount = '[#]';
+const productCount = '[#]';
+---
+
+{
+  variant === 'box' ? (
+    <aside class="rounded-[var(--radius-soft)] border-2 border-river/30 bg-sage p-6 md:p-8" aria-label="Required Medicare disclaimer">
+      <p class="mb-2 font-bold text-river">Please read</p>
+      <p class="text-ink">
+        We do not offer every plan available in your area. Currently we represent {orgCount} organizations which offer {productCount} products in your area. Please contact <a href="https://www.medicare.gov" rel="noopener">Medicare.gov</a> or <a href="tel:+18006334227">1-800-MEDICARE</a> to get information on all of your options.
+      </p>
+    </aside>
+  ) : (
+    <p class={variant === 'footer' ? 'text-[1rem] leading-relaxed' : ''}>
+      We do not offer every plan available in your area. Currently we represent {orgCount} organizations which offer {productCount} products in your area. Please contact <a href="https://www.medicare.gov" rel="noopener" class={variant === 'footer' ? 'text-inherit' : ''}>Medicare.gov</a> or <a href="tel:+18006334227" class={variant === 'footer' ? 'text-inherit' : ''}>1-800-MEDICARE</a> to get information on all of your options.
+    </p>
+  )
+}

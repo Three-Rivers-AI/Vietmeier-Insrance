@@ -1,0 +1,37 @@
+---
+import { site, nav } from '../data/site';
+import MedicareDisclaimer from './MedicareDisclaimer.astro';
+import Wordmark from './Wordmark.astro';
+const year = 2026;
+---
+<footer class="bg-river-deep pb-28 pt-16 text-paper on-dark lg:pb-12">
+  <div class="wrap grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
+    <div>
+      <Wordmark light />
+      <address class="mt-6 text-paper/90">
+        {site.agentName}, licensed agent<br />
+        {site.address}<br />
+        <a href={`tel:${site.phoneTel}`} class="text-paper">{site.phoneDisplay}</a><br />
+        {site.hours}
+      </address>
+    </div>
+    <nav aria-label="Footer">
+      <h2 class="font-sans text-[1rem] font-bold tracking-[0.08em] text-paper uppercase">Pages</h2>
+      <ul class="mt-3 grid gap-0.5">
+        {nav.map((n) => <li><a href={n.href} class="inline-flex min-h-12 items-center text-paper">{n.label}</a></li>)}
+        <li><a href="/privacy" class="inline-flex min-h-12 items-center text-paper">Privacy</a></li>
+        <li><a href="/terms" class="inline-flex min-h-12 items-center text-paper">Terms</a></li>
+      </ul>
+    </nav>
+    <div class="text-[1rem] text-paper/90">
+      <h2 class="font-sans text-[1rem] font-bold tracking-[0.08em] text-paper uppercase">Licensing</h2>
+      <p class="mt-3">PA License {site.license}<br />NPN {site.npn}</p>
+      <p class="mt-3">{site.carriers}</p>
+      <p class="mt-3">Not connected with or endorsed by the U.S. government or the federal Medicare program.</p>
+    </div>
+  </div>
+  <div class="wrap mt-12 border-t border-paper/20 pt-8 text-paper/90">
+    <MedicareDisclaimer variant="footer" />
+    <p class="mt-6 text-[1rem]">© {year} {site.agency}. Concept site by Three Rivers AI. Not a live insurance agency. No tracking, no cookies.</p>
+  </div>
+</footer>

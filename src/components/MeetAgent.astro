@@ -1,0 +1,41 @@
+---
+import { site } from '../data/site';
+import AgentPlaceholder from './AgentPlaceholder.astro';
+import Icon from './Icon.astro';
+
+interface Props { full?: boolean }
+const { full = false } = Astro.props;
+const lines = ['Medicare Advantage', 'Medicare Part D', 'Medigap', 'Life insurance', 'Annuities', 'Hospital indemnity', 'Dental and vision'];
+---
+<section class="section-pad" aria-labelledby="agent-heading">
+  <div class="wrap grid items-start gap-12 md:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
+    <div data-reveal>
+      <AgentPlaceholder />
+      <dl class="mt-6 grid gap-2 text-[1.0625rem]">
+        <div class="flex gap-2"><dt class="font-bold">PA License:</dt><dd>{site.license}</dd></div>
+        <div class="flex gap-2"><dt class="font-bold">NPN:</dt><dd>{site.npn}</dd></div>
+      </dl>
+    </div>
+    <div data-reveal>
+      <p class="eyebrow">Meet your agent</p>
+      <h2 id="agent-heading" class="mt-3">Hi, I am {site.agentName}. I grew up [a few blocks from the office].</h2>
+      <div class="mt-6 grid max-w-[40rem] gap-4">
+        <p>I have helped neighbors with Medicare and life insurance since [year]. Before that, I [previous work, in one line].</p>
+        <p>Here is how I work. You call, you get me. I explain your choices in plain words, I show you the tradeoffs, and I write down what we talked about so you can show your kids. If the plan you have is still right for you, I say so.</p>
+        {full && (
+          <p>Outside of work you will find me [at the parish fish fry, coaching Little League, walking the dog on Chartiers Avenue]. I live in [neighborhood] with [family details].</p>
+        )}
+      </div>
+      <h3 class="mt-10 text-[1.35rem]">The coverage I can help with</h3>
+      <ul class="mt-4 flex flex-wrap gap-2.5" role="list">
+        {lines.map((l) => (
+          <li class="inline-flex items-center gap-2 rounded-full bg-sage px-4 py-2 text-[1.0625rem] font-bold text-river">
+            <Icon name="check" size={18} /> {l}
+          </li>
+        ))}
+      </ul>
+      <p class="mt-5 text-ink-soft">{site.carriers}</p>
+      {!full && <a href="/about" class="btn btn-secondary mt-8">More about how I work <Icon name="arrow" /></a>}
+    </div>
+  </div>
+</section>

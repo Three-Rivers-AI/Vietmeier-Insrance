@@ -1,0 +1,87 @@
+---
+import { site, nav } from '../data/site';
+import Icon from './Icon.astro';
+import TextSize from './TextSize.astro';
+import Wordmark from './Wordmark.astro';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-sm">
+  <div class="wrap flex items-center justify-between gap-4 py-3">
+    <Wordmark />
+
+    <div class="hidden items-center gap-5 lg:flex">
+      <TextSize id="ts-desktop" />
+      <a href={`tel:${site.phoneTel}`} class="flex min-h-12 items-center gap-2 text-[1.375rem] font-bold text-river no-underline hover:underline">
+        <Icon name="phone" size={26} />
+        <span><span class="sr-only">Call </span>{site.phoneShort}</span>
+      </a>
+      <a href={site.bookHref} class="btn btn-primary">Book a 15-minute call</a>
+    </div>
+
+    <button
+      type="button"
+      id="menu-toggle"
+      class="btn btn-secondary min-h-12 px-5 lg:hidden"
+      aria-expanded="false"
+      aria-controls="site-nav-mobile"
+    >
+      <span data-open-label>Menu</span>
+      <span data-close-label hidden>Close</span>
+    </button>
+  </div>
+
+  <nav aria-label="Main" class="hidden border-t border-line/70 lg:block">
+    <ul class="wrap flex flex-wrap items-center gap-x-1 py-1">
+      {nav.map((item) => {
+        const current = path === item.href;
+        return (
+          <li>
+            <a
+              href={item.href}
+              aria-current={current ? 'page' : undefined}
+              class:list={[
+                'inline-flex min-h-12 items-center rounded-lg px-3 text-[1.0625rem] font-bold text-ink underline-offset-[0.3em] hover:text-river',
+                current ? 'text-river decoration-clay decoration-[3px]' : '',
+              ]}
+            >{item.label}</a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+
+  <div id="site-nav-mobile" class="border-t border-line bg-paper lg:hidden" hidden>
+    <nav aria-label="Main (mobile)" class="wrap py-4">
+      <ul class="grid gap-1">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={path === item.href ? 'page' : undefined}
+              class="flex min-h-12 items-center rounded-lg px-2 text-[1.25rem] font-bold text-river aria-[current=page]:bg-sage"
+            >{item.label}</a>
+          </li>
+        ))}
+      </ul>
+      <TextSize id="ts-mobile" class="mt-5 flex-wrap" />
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-toggle');
+  const panel = document.getElementById('site-nav-mobile');
+  if (btn && panel) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+      btn.querySelector<HTMLElement>('[data-open-label]')!.hidden = open;
+      btn.querySelector<HTMLElement>('[data-close-label]')!.hidden = !open;
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); }
+    });
+  }
+</script>

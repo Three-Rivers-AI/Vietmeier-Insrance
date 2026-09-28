@@ -1,0 +1,23 @@
+---
+// Thin concept banner. Dismissal lasts for this browser session only (sessionStorage).
+---
+<div id="demo-banner" class="bg-ink text-paper on-dark">
+  <div class="wrap flex items-center justify-between gap-3 py-1.5 text-[0.95rem] leading-snug">
+    <p>Concept site by Three Rivers AI. Not a live insurance agency.</p>
+    <button type="button" id="demo-banner-close" class="inline-flex min-h-12 min-w-12 shrink-0 items-center justify-center rounded-full text-paper hover:bg-white/10" aria-label="Hide this notice for now">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</div>
+<script is:inline>
+  (function () {
+    var b = document.getElementById('demo-banner');
+    try { if (sessionStorage.getItem('demo-banner') === 'hidden') b.hidden = true; } catch (e) {}
+    document.getElementById('demo-banner-close').addEventListener('click', function () {
+      b.hidden = true;
+      try { sessionStorage.setItem('demo-banner', 'hidden'); } catch (e) {}
+      var main = document.getElementById('main');
+      if (main) main.focus({ preventScroll: true });
+    });
+  })();
+</script>

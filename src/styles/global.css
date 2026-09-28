@@ -1,0 +1,237 @@
+@import 'tailwindcss';
+@import '@fontsource/atkinson-hyperlegible/latin-400.css';
+@import '@fontsource/atkinson-hyperlegible/latin-700.css';
+@import '@fontsource/source-serif-4/latin-600.css';
+
+@theme {
+  --color-paper: #faf6ef;
+  --color-paper-deep: #f3ece0;
+  --color-river: #1f4a45;
+  --color-river-deep: #163632;
+  --color-river-soft: #2c615b;
+  --color-clay: #c8795a; /* decorative only: 3.1:1 on paper */
+  --color-clay-ink: #8f4a30; /* clay for text: 6.1:1 on paper */
+  --color-clay-wash: #f5e3d8;
+  --color-ink: #2b2a28; /* 13.3:1 on paper */
+  --color-ink-soft: #4a4843; /* 8.5:1 on paper */
+  --color-sage: #e6ebe3;
+  --color-line: #d9d2c4;
+
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-soft: 1.25rem;
+  --shadow-card: 0 1px 2px rgb(43 42 40 / 0.06), 0 6px 20px -8px rgb(43 42 40 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(43 42 40 / 0.07), 0 14px 32px -12px rgb(43 42 40 / 0.28);
+}
+
+/* ---------- Base (layered so Tailwind utilities can override) ---------- */
+@layer base {
+
+
+/* Text-size control sets data-size on <html>. rem scales everything. */
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 7rem;
+  scroll-padding-bottom: 6rem; /* room for the mobile call bar */
+}
+html[data-size='lg'] { font-size: 112.5%; }
+html[data-size='xl'] { font-size: 125%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  /* 19px mobile, 20px desktop at the default size */
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+@media (min-width: 64rem) {
+  body { font-size: 1.25rem; }
+}
+
+/* Nothing slanted, anywhere. Emphasis uses weight or color. */
+*, *::before, *::after,
+em, i, cite, var, dfn, address, blockquote, q {
+  font-style: normal;
+}
+em, i { font-weight: 700; }
+::selection { background: var(--color-clay-wash); color: var(--color-ink); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--color-river);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.25rem, 1.6rem + 3vw, 3.75rem); }
+h2 { font-size: clamp(1.875rem, 1.4rem + 2vw, 2.75rem); }
+h3 { font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.625rem); line-height: 1.25; }
+p { text-wrap: pretty; }
+
+a {
+  color: var(--color-river);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-thickness: 0.14em; }
+
+/* Big, obvious focus rings for keyboard users */
+:focus-visible {
+  outline: 3px solid var(--color-clay-ink);
+  outline-offset: 3px;
+  border-radius: 0.35rem;
+}
+.on-dark :focus-visible,
+.on-dark:focus-visible { outline-color: #fff; }
+
+img { max-width: 100%; height: auto; }
+
+}
+
+/* ---------- Layout helpers ---------- */
+@utility wrap {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 48rem) { padding-inline: 2.5rem; }
+}
+@utility prose-width { max-width: 40rem; }
+@utility section-pad {
+  padding-block: 4.5rem;
+  @media (min-width: 64rem) { padding-block: 7rem; }
+}
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-clay-ink);
+}
+
+/* ---------- Buttons ---------- */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  &:hover, &:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-lift); text-decoration: none; }
+  &:active { transform: translateY(1px) scale(0.98); box-shadow: none; transition-duration: 80ms; }
+}
+@utility btn-primary {
+  background: var(--color-river);
+  color: #fff;
+  &:hover { background: var(--color-river-deep); }
+}
+@utility btn-secondary {
+  background: #fff;
+  color: var(--color-river);
+  border-color: var(--color-river);
+}
+@utility btn-light {
+  background: var(--color-paper);
+  color: var(--color-river);
+}
+@utility btn-outline-light {
+  background: transparent;
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.85);
+  &:hover { background: rgb(255 255 255 / 0.1); }
+}
+
+/* ---------- Cards ---------- */
+@utility card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-card);
+}
+@utility card-lift {
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  &:hover, &:focus-visible, &:focus-within { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  &:active { transform: translateY(1px) scale(0.99); transition-duration: 80ms; }
+}
+
+/* Soft-cornered photo frame for everything that is not hero or the band */
+@utility photo-frame {
+  border-radius: var(--radius-soft);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background: var(--color-paper-deep);
+}
+
+/* ---------- Motion ---------- */
+/* Reveal targets are hidden only after JS confirms motion is allowed (html.motion-ok). */
+.motion-ok [data-reveal] { opacity: 0; transform: translateY(16px); }
+.motion-ok [data-reveal].is-in { opacity: 1; transform: none; }
+
+@keyframes hero-drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-drift { animation: hero-drift 20s ease-out forwards; }
+  .fade-up { animation: fade-up 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .fade-up-2 { animation-delay: 120ms; }
+  .fade-up-3 { animation-delay: 240ms; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Accordions (native details) ---------- */
+details.acc > summary { list-style: none; cursor: pointer; }
+details.acc > summary::-webkit-details-marker { display: none; }
+details.acc .acc-icon { transition: transform 250ms ease; }
+details.acc[open] .acc-icon { transform: rotate(45deg); }
+details.acc .acc-body { overflow: hidden; }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -10rem;
+  z-index: 100;
+  background: var(--color-river);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+}
+.skip-link:focus { top: 1rem; }
+
+.sr-only-focusable:not(:focus) {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}

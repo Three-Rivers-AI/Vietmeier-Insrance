@@ -1,0 +1,56 @@
+---
+import { site } from '../data/site';
+import Photo from './Photo.astro';
+---
+<section class="relative isolate overflow-hidden text-paper on-dark" aria-labelledby="local-heading">
+  <div class="absolute inset-0 -z-10">
+    <Photo slug="pittsburgh-hillside" sizes="100vw" class="block h-full w-full" imgClass="h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgb(22_54_50/0.78),rgb(22_54_50/0.9))] md:bg-[linear-gradient(90deg,rgb(22_54_50/0.94)_0%,rgb(22_54_50/0.82)_55%,rgb(22_54_50/0.55)_100%)]"></div>
+  </div>
+  <div class="wrap section-pad grid items-center gap-12 md:grid-cols-[1.3fr_1fr]">
+    <div data-reveal>
+      <p class="eyebrow !text-clay-wash">Local</p>
+      <h2 id="local-heading" class="mt-3 text-paper">The person who answers is right here in McKees Rocks.</h2>
+      <p class="mt-5 max-w-[34rem] text-paper/95">
+        When you call, you get me, not a switchboard in another state. I can come to your kitchen table anywhere from Sheraden to Coraopolis, or you can stop by the office. I know the local doctors and hospitals people ask about, and I will still be here next fall.
+      </p>
+      <address class="mt-6 text-paper">
+        <strong>{site.address}</strong><br />
+        {site.hours}
+      </address>
+    </div>
+
+    <figure class="mx-auto w-full max-w-[22rem]" data-reveal>
+      <svg viewBox="0 0 320 300" role="img" aria-labelledby="map-title map-desc" class="w-full drop-shadow-[0_18px_30px_rgb(0_0_0/0.25)]">
+        <title id="map-title">Where to find us</title>
+        <desc id="map-desc">A simple drawing of Pittsburgh's three rivers, with a pin on McKees Rocks, on the Ohio River just downstream from downtown.</desc>
+        <defs><clipPath id="map-clip"><rect x="0" y="0" width="320" height="300" rx="28" /></clipPath></defs>
+        <g clip-path="url(#map-clip)">
+        <rect x="0" y="0" width="320" height="300" fill="#FAF6EF" />
+        <!-- hills -->
+        <path d="M0 230c40-18 80-22 120-12s90 8 130-10 60-10 70-6V300H0Z" fill="#E6EBE3" />
+        <path d="M0 60c40 10 70 6 100-6s70-14 110-2 80 8 110-4V0H0Z" fill="#E6EBE3" />
+        <!-- Ohio River flowing west (left) from the Point -->
+        <path d="M200 150C170 158 140 170 110 172S50 176 0 196" fill="none" stroke="#9FC0BA" stroke-width="16" stroke-linecap="round" />
+        <!-- Allegheny from northeast -->
+        <path d="M200 150c22-10 48-28 70-52s36-40 50-50" fill="none" stroke="#9FC0BA" stroke-width="13" stroke-linecap="round" />
+        <!-- Monongahela from southeast -->
+        <path d="M200 150c26 8 52 22 76 42s34 34 44 44" fill="none" stroke="#9FC0BA" stroke-width="13" stroke-linecap="round" />
+        <!-- downtown dot -->
+        <circle cx="208" cy="150" r="7" fill="#1F4A45" />
+        <text x="220" y="140" font-family="Atkinson Hyperlegible, sans-serif" font-size="15" font-weight="700" fill="#2B2A28">Downtown</text>
+        <text x="30" y="226" font-family="Atkinson Hyperlegible, sans-serif" font-size="14" fill="#4A4843">Ohio River</text>
+        <!-- pin at McKees Rocks, south bank of the Ohio -->
+        <g transform="translate(108 118)">
+          <ellipse cx="0" cy="66" rx="14" ry="4" fill="rgb(43 42 40 / 0.2)" />
+          <path d="M0 64S-24 36-24 20a24 24 0 0 1 48 0C24 36 0 64 0 64Z" fill="#C8795A" stroke="#8F4A30" stroke-width="2" />
+          <circle cx="0" cy="20" r="9" fill="#FAF6EF" />
+        </g>
+        <rect x="40" y="252" width="150" height="32" rx="16" fill="#1F4A45" />
+        <text x="115" y="273" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="16" font-weight="700" fill="#FAF6EF">McKees Rocks</text>
+        </g>
+      </svg>
+      <figcaption class="mt-3 text-center text-[1rem] text-paper/90">Just downriver from the Point. Parking out front.</figcaption>
+    </figure>
+  </div>
+</section>

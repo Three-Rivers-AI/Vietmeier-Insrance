@@ -1,0 +1,21 @@
+---
+// Placeholder cards only. Never invent testimonials or reviewer names.
+// Replace with real client words, used with written permission.
+---
+<section class="section-pad" aria-labelledby="reviews-heading">
+  <div class="wrap">
+    <div class="max-w-[42rem]" data-reveal>
+      <p class="eyebrow">From neighbors</p>
+      <h2 id="reviews-heading" class="mt-3">What clients say, in their own words.</h2>
+      <p class="mt-4 text-ink-soft">This part of the site fills in with real reviews once clients say yes to sharing them.</p>
+    </div>
+    <ul class="mt-10 grid gap-5 md:grid-cols-3" data-stagger role="list">
+      {[1, 2, 3].map((n) => (
+        <li class="flex min-h-[14rem] flex-col justify-between rounded-[var(--radius-soft)] border-2 border-dashed border-river/35 bg-white p-6 md:p-8">
+          <p class="font-serif text-[1.35rem] leading-snug text-river">Real client review goes here, with permission.</p>
+          <p class="mt-6 text-[1rem] font-bold tracking-[0.06em] text-clay-ink uppercase">Placeholder {n} of 3</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

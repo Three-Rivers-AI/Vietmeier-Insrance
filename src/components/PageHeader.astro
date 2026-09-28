@@ -1,0 +1,24 @@
+---
+import Photo from './Photo.astro';
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  photo?: string;
+  photoAlt?: string;
+}
+const { eyebrow, title, intro, photo, photoAlt } = Astro.props;
+---
+<section class="border-b border-line bg-paper-deep/50 py-14 md:py-20" aria-labelledby="page-heading">
+  <div class:list={['wrap grid items-center gap-10', photo && 'md:grid-cols-[1.25fr_1fr] lg:gap-16']}>
+    <div>
+      <p class="eyebrow fade-up">{eyebrow}</p>
+      <h1 id="page-heading" class="fade-up fade-up-2 mt-3">{title}</h1>
+      <p class="fade-up fade-up-3 mt-5 max-w-[38rem] text-[1.25rem] md:text-[1.375rem]">{intro}</p>
+      <slot />
+    </div>
+    {photo && (
+      <Photo slug={photo} eager sizes="(min-width: 48rem) 40vw, 100vw" class="photo-frame block aspect-[4/3]" imgClass="h-full w-full object-cover" alt={photoAlt} />
+    )}
+  </div>
+</section>
