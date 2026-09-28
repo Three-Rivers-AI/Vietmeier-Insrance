@@ -12,10 +12,10 @@ import TalkItThrough from '../components/TalkItThrough.astro';
 interface Props {
   title: string;
   description: string;
-  heroImage?: string; // preload path for the LCP image
+  heroSrcset?: string; // AVIF srcset of the LCP image, preloaded
   closing?: boolean;
 }
-const { title, description, heroImage, closing = true } = Astro.props;
+const { title, description, heroSrcset, closing = true } = Astro.props;
 const fullTitle = title === 'Home' ? 'Vietmeier Insurance | Medicare and life insurance in McKees Rocks, PA' : `${title} | Vietmeier Insurance, McKees Rocks`;
 ---
 <!doctype html>
@@ -33,7 +33,7 @@ const fullTitle = title === 'Home' ? 'Vietmeier Insurance | Medicare and life in
     <link rel="preload" href={sansWoff2} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={sansBoldWoff2} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={serifWoff2} as="font" type="font/woff2" crossorigin />
-    {heroImage && <link rel="preload" as="image" href={heroImage} type="image/avif" fetchpriority="high" />}
+    {heroSrcset && <link rel="preload" as="image" imagesrcset={heroSrcset} imagesizes="100vw" type="image/avif" fetchpriority="high" />}
     <script is:inline>
       // Apply the saved text size before first paint.
       try {

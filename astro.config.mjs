@@ -7,5 +7,6 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'ignore',
   build: { inlineStylesheets: 'always' },
-  vite: { plugins: [tailwindcss()] },
+  // Cast: @tailwindcss/vite ships types for a newer Vite than Astro 5 bundles.
+  vite: { plugins: [/** @type {any} */ (tailwindcss())] },
 });

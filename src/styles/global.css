@@ -25,7 +25,9 @@
   --shadow-lift: 0 2px 4px rgb(43 42 40 / 0.07), 0 14px 32px -12px rgb(43 42 40 / 0.28);
 }
 
-/* ---------- Base ---------- */
+/* ---------- Base (layered so Tailwind utilities can override) ---------- */
+@layer base {
+
 
 /* Text-size control sets data-size on <html>. rem scales everything. */
 html {
@@ -92,6 +94,8 @@ a:hover { text-decoration-thickness: 0.14em; }
 .on-dark:focus-visible { outline-color: #fff; }
 
 img { max-width: 100%; height: auto; }
+
+}
 
 /* ---------- Layout helpers ---------- */
 @utility wrap {

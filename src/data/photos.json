@@ -1,0 +1,82 @@
+{
+  "hero": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "alt": "A gray-haired couple in their seventies at a worn wooden kitchen table; she lifts the lid off a steaming pot while he smiles at a plate of pasta, with daylight coming through the window behind them."
+  },
+  "grandparent": {
+    "width": 1600,
+    "height": 900,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "alt": "A smiling grandmother and her young granddaughter sit at a kitchen table with glasses of orange juice, croissants and a jar of jam."
+  },
+  "couple-walk": {
+    "width": 1600,
+    "height": 2133,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "alt": "An older couple walks side by side down a quiet, tree-lined road in warm evening light."
+  },
+  "pittsburgh-bridge": {
+    "width": 1600,
+    "height": 1066,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "alt": "The yellow Roberto Clemente Bridge framed by flowering spring trees, with downtown Pittsburgh towers rising behind it."
+  },
+  "pittsburgh-hillside": {
+    "width": 2400,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      2400
+    ],
+    "alt": "Sunlit rooftops and chimneys of Pittsburgh's South Side Slopes hillside neighborhood in autumn, with the downtown skyline under a clear blue sky."
+  },
+  "rowhouses": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      1920
+    ],
+    "alt": "A row of red-brick rowhouses in Pittsburgh's Greenfield neighborhood with white-railed front porches, striped awnings, steep front steps and a small flower garden."
+  },
+  "paperwork": {
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "alt": "A pair of black reading glasses on a table beside an open ledger of papers, a pen and a calculator."
+  }
+}

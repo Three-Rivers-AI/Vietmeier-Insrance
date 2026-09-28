@@ -12,12 +12,12 @@ import EasyToRead from '../components/EasyToRead.astro';
 import photos from '../data/photos.json';
 
 const hero = (photos as Record<string, { widths: number[] }>).hero;
-const heroPreload = hero ? `/photos/hero-${hero.widths.find((w) => w >= 800) ?? hero.widths[0]}.avif` : undefined;
+const heroSrcset = hero.widths.map((w) => `/photos/hero-${w}.avif ${w}w`).join(', ');
 ---
 <Base
   title="Home"
   description="A local, independent Medicare and life insurance agent in McKees Rocks, PA. One person, one phone number, plain answers."
-  heroImage={heroPreload}
+  heroSrcset={heroSrcset}
 >
   <Hero />
   <Chooser />
