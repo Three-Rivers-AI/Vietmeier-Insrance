@@ -5,7 +5,7 @@ const { id, heading, eyebrow, tone = 'paper' } = Astro.props;
 const hid = `${id ?? heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}-h`;
 ---
 <section id={id} class:list={['section-pad', tone === 'sage' && 'bg-sage']} aria-labelledby={hid}>
-  <div class="wrap grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
+  <div class="wrap grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
     <div data-reveal>
       {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       <h2 id={hid} class:list={[eyebrow && 'mt-3']}>{heading}</h2>

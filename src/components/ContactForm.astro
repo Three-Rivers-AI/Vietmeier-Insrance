@@ -151,11 +151,12 @@ const error = 'field-error mt-2 flex items-start gap-2 text-[1.0625rem] font-bol
   };
 
   if (form && thanks && summary) {
-    // Check a field again when someone leaves it, but only after it has shown an error.
+    // Clear an error as soon as the field is fixed, while typing. We never re-check on blur:
+    // removing a message on blur shifts the layout under the next tap and makes it miss.
     Object.keys(rules).forEach((id) => {
       const el = document.getElementById(id)!;
-      el.addEventListener(el.getAttribute('type') === 'checkbox' ? 'change' : 'blur', () => {
-        if (el.getAttribute('aria-invalid') === 'true') setError(id, rules[id](form));
+      el.addEventListener(el.getAttribute('type') === 'checkbox' ? 'change' : 'input', () => {
+        if (el.getAttribute('aria-invalid') === 'true' && !rules[id](form)) setError(id, '');
       });
     });
 

@@ -34,6 +34,7 @@ html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   scroll-padding-top: 7rem;
+  scroll-padding-bottom: 6rem; /* room for the mobile call bar */
 }
 html[data-size='lg'] { font-size: 112.5%; }
 html[data-size='xl'] { font-size: 125%; }
@@ -50,6 +51,7 @@ body {
   font-size: 1.1875rem;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
 }
 @media (min-width: 64rem) {
   body { font-size: 1.25rem; }
