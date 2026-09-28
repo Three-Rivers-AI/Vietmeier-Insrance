@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import MeetAgent from '../components/MeetAgent.astro';
+import Prose from '../components/Prose.astro';
+import Reviews from '../components/Reviews.astro';
+---
+<Base title="About" description="Meet the local, independent insurance agent behind Vietmeier Insurance in McKees Rocks, PA.">
+  <PageHeader
+    eyebrow="About"
+    title="One person. One phone number. No call centers."
+    intro="Vietmeier Insurance is a one-person office in McKees Rocks. When you call, you get me, and I will still be here next year."
+    photo="pittsburgh-bridge"
+  />
+  <MeetAgent full />
+  <Prose heading="How I work, in five promises." eyebrow="Promises" tone="sage">
+    <ul>
+      <li><strong>You get me.</strong> Not a call center, not a new rep each year.</li>
+      <li><strong>I call only when you ask.</strong> No surprise follow-ups, no selling your name to anyone.</li>
+      <li><strong>I tell you when to stay put.</strong> If your plan still fits, I say so.</li>
+      <li><strong>You get it in writing.</strong> A short summary of what we talked about, to share with family.</li>
+      <li><strong>You decide.</strong> Take the papers home. Sleep on it. Call me with more questions.</li>
+    </ul>
+  </Prose>
+  <Reviews />
+</Base>

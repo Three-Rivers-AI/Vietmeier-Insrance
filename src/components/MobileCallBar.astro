@@ -1,0 +1,14 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+---
+<div class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/97 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_-12px_rgb(43_42_40/0.25)] lg:hidden">
+  <div class="wrap grid grid-cols-2 gap-3 py-2.5">
+    <a href={`tel:${site.phoneTel}`} class="btn btn-secondary px-3">
+      <Icon name="phone" size={22} /> Call
+    </a>
+    <a href={site.bookHref} class="btn btn-primary px-3">
+      <Icon name="calendar" size={22} /> Book a call
+    </a>
+  </div>
+</div>

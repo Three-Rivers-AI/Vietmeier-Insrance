@@ -1,0 +1,275 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+
+// Sources for the Medicare facts in these panels (checked 2026-09-28):
+// IEP (7 months around the 65th birthday month):
+//   https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-does-medicare-coverage-start
+// Automatic A and B if getting Social Security or RRB benefits at least 4 months before 65:
+//   https://www.medicare.gov/basics/get-started-with-medicare/sign-up/how-do-i-sign-up-for-medicare
+// Delaying Part B with current work coverage, 8-month SEP, COBRA/retiree do not count:
+//   https://www.medicare.gov/basics/get-started-with-medicare/medicare-basics/working-past-65
+//   https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-does-medicare-coverage-start
+// Open Enrollment Oct 15 to Dec 7, changes start Jan 1:
+//   https://www.medicare.gov/basics/get-started-with-medicare/get-more-coverage/joining-a-plan
+
+type Choice = {
+  id: string;
+  icon: 'cake' | 'glasses' | 'briefcase' | 'hands' | 'sprout';
+  title: string;
+  heading: string;
+  answer: string[];
+  steps: string[];
+};
+
+const choices: Choice[] = [
+  {
+    id: 'turning-65',
+    icon: 'cake',
+    title: 'Turning 65 soon',
+    heading: 'You have a seven-month window. Starting early helps.',
+    answer: [
+      'Your first chance to sign up is called the Initial Enrollment Period. It covers the three months before your 65th birthday month, the month itself, and the three months after.',
+      'If you have been getting Social Security benefits for at least four months before you turn 65, you are signed up for Parts A and B on your own. If not, you sign up yourself. Then you pick how you want the rest of your coverage to work.',
+    ],
+    steps: [
+      'Check whether you will be enrolled automatically or need to sign up yourself.',
+      'Write down your doctors, your pharmacy and the medicines you take.',
+      'Sit down with me for 15 minutes and we will line up your choices side by side.',
+    ],
+  },
+  {
+    id: 'second-look',
+    icon: 'glasses',
+    title: 'Already on Medicare, want a second look',
+    heading: 'Plans change every year. A quick review is worth it.',
+    answer: [
+      'Drug lists, costs and doctor networks can change each January. Your plan mails you a letter each fall that lists the changes. It is easy to miss in the pile.',
+      'From October 15 to December 7 you can switch plans for the next year. I compare what you have with what is out there, and if your plan still fits, I tell you that.',
+    ],
+    steps: [
+      'Find the fall letter from your plan, often called the Annual Notice of Change.',
+      'Make a list of your current prescriptions and doses.',
+      'Book a 15-minute review. If you are fine where you are, that is the answer.',
+    ],
+  },
+  {
+    id: 'leaving-work',
+    icon: 'briefcase',
+    title: "Leaving a job's health plan",
+    heading: 'Timing matters most here. Call before your last day.',
+    answer: [
+      'If you or your spouse have health coverage through a current job, you may be able to wait on Part B. When the job or the coverage ends, you get a Special Enrollment Period to sign up.',
+      'COBRA and retiree coverage do not count as coverage from current work. That trips up a lot of people, so we check your dates together.',
+    ],
+    steps: [
+      'Ask HR for the exact date your work coverage ends.',
+      'Ask whether you will be offered COBRA or retiree coverage, and get it in writing.',
+      'Call me with those dates and we will map out what to sign up for, and when.',
+    ],
+  },
+  {
+    id: 'helping-parent',
+    icon: 'hands',
+    title: 'Helping a parent',
+    heading: 'Bring your mom or dad. I will talk with both of you.',
+    answer: [
+      'Lots of my calls are three-way: a parent at the kitchen table and a son or daughter on speaker from Cranberry or Charlotte. With your parent in the room and saying yes, we can all talk it through together.',
+      'I never need a Social Security number or Medicare number to answer questions or compare options.',
+    ],
+    steps: [
+      'Gather the Medicare mail your parent has been getting, opened or not.',
+      'Write down their doctors, pharmacy and medicines.',
+      'Pick a time that works for both of you and book a call.',
+    ],
+  },
+  {
+    id: 'life-annuity',
+    icon: 'sprout',
+    title: 'Life insurance or annuity question',
+    heading: 'Tell me what you want the money to do.',
+    answer: [
+      'Leaving something for the kids, covering final expenses, or turning savings into a steady monthly check are different jobs. Each one has its own tool.',
+      'I explain the choices in plain words, show you what each one costs, and you decide in your own time.',
+    ],
+    steps: [
+      'Write down, in one sentence, what you want this money to do.',
+      'Find any policies or statements you already have.',
+      'Call me and we will go through them together.',
+    ],
+  },
+];
+---
+<section id="where-are-you" class="section-pad" aria-labelledby="chooser-heading">
+  <div class="wrap">
+    <div class="max-w-[44rem]" data-reveal>
+      <p class="eyebrow">Start here</p>
+      <h2 id="chooser-heading" class="mt-3">Where are you right now?</h2>
+      <p class="mt-4 text-ink-soft">Pick the one that sounds most like you. You get a short, plain answer and three next steps. No forms, no sign-up.</p>
+    </div>
+
+    <div class="chooser mt-10" data-chooser>
+      <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5" data-stagger role="list">
+        {choices.map((c) => (
+          <li class="chooser-item" data-item={c.id}>
+            <button
+              type="button"
+              class="card card-lift chooser-card flex h-full min-h-[8.5rem] w-full flex-col items-start gap-4 p-5 text-left md:p-6"
+              aria-expanded="false"
+              aria-controls={`panel-${c.id}`}
+              data-choice={c.id}
+            >
+              <span class="flex h-12 w-12 items-center justify-center rounded-full bg-clay-wash text-clay-ink">
+                <Icon name={c.icon} size={28} />
+              </span>
+              <span class="font-serif text-[1.3rem] leading-snug font-semibold text-river">{c.title}</span>
+              <span class="mt-auto inline-flex items-center gap-1.5 text-[1rem] font-bold text-clay-ink" aria-hidden="true">
+                <span class="when-closed">Show me</span><span class="when-open">Showing below</span>
+                <Icon name="arrow" size={18} class="chooser-arrow" />
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <div data-panels>
+        {choices.map((c) => (
+          <div
+            id={`panel-${c.id}`}
+            class="chooser-panel mt-1 rounded-[var(--radius-soft)] border-2 border-river/20 bg-sage p-6 md:p-10"
+            role="region"
+            aria-labelledby={`panel-${c.id}-h`}
+            tabindex="-1"
+            hidden
+            data-panel={c.id}
+          >
+            <div class="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
+              <div>
+                <p class="eyebrow">{c.title}</p>
+                <h3 id={`panel-${c.id}-h`} class="mt-2 text-[clamp(1.5rem,1.2rem+1.2vw,2rem)]">{c.heading}</h3>
+                {c.answer.map((p) => <p class="mt-4">{p}</p>)}
+              </div>
+              <div>
+                <h4 class="text-[1.25rem]">Your next three steps</h4>
+                <ol class="mt-4 grid gap-4">
+                  {c.steps.map((s, i) => (
+                    <li class="flex gap-4">
+                      <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-river font-bold text-white" aria-hidden="true">{i + 1}</span>
+                      <span class="pt-0.5">{s}</span>
+                    </li>
+                  ))}
+                </ol>
+                <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <a href={`tel:${site.phoneTel}`} class="btn btn-primary">
+                    <Icon name="phone" /> Call {site.phoneShort}
+                  </a>
+                  <button type="button" class="btn btn-secondary" data-close-panel>Pick a different one</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chooser-card[aria-expanded='true'] {
+    border-color: var(--color-river);
+    box-shadow: 0 0 0 2px var(--color-river), var(--shadow-lift);
+    background: #fff;
+  }
+  .when-open { display: none; }
+  .chooser-card[aria-expanded='true'] .when-open { display: inline; }
+  .chooser-card[aria-expanded='true'] .when-closed { display: none; }
+  .chooser-card :global(.chooser-arrow) { transition: transform 200ms ease; }
+  .chooser-card[aria-expanded='true'] :global(.chooser-arrow) { transform: rotate(90deg); }
+  @media (min-width: 40rem) and (max-width: 79.99rem) {
+    .chooser-item[data-item='life-annuity'] { grid-column: 1 / -1; }
+  }
+  /* At the largest text size, five across gets cramped. */
+  @media (min-width: 80rem) {
+    :global(html[data-size='xl']) .chooser ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+</style>
+
+<script>
+  import { animate } from 'motion';
+
+  const root = document.querySelector<HTMLElement>('[data-chooser]');
+  if (root) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-choice]'));
+    let openId: string | null = null;
+
+    // The answer opens right under the row that holds the card you tapped,
+    // so it never lands far away from your finger.
+    const list = root.querySelector<HTMLUListElement>('ul')!;
+    const items = Array.from(list.querySelectorAll<HTMLElement>('.chooser-item'));
+    const slot = document.createElement('li');
+    slot.className = 'panel-slot';
+    slot.style.gridColumn = '1 / -1';
+    const place = (panel: HTMLElement, id: string) => {
+      const cols = getComputedStyle(list).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+      const idx = items.findIndex((i) => i.dataset.item === id);
+      const isFullRow = getComputedStyle(items[idx]).gridColumnStart === '1' && getComputedStyle(items[idx]).gridColumnEnd === '-1';
+      const rowEnd = isFullRow ? idx : Math.min(Math.floor(idx / cols) * cols + cols - 1, items.length - 1);
+      items[rowEnd].after(slot);
+      slot.appendChild(panel);
+    };
+
+    const close = (id: string) => {
+      const panel = document.getElementById(`panel-${id}`)!;
+      root.querySelector(`[data-choice="${id}"]`)!.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+      if (openId === id) openId = null;
+    };
+
+    const open = (id: string) => {
+      if (openId && openId !== id) close(openId);
+      const panel = document.getElementById(`panel-${id}`)!;
+      const btn = root.querySelector<HTMLButtonElement>(`[data-choice="${id}"]`)!;
+      place(panel, id);
+      btn.setAttribute('aria-expanded', 'true');
+      panel.hidden = false;
+      openId = id;
+      if (!reduced.matches) {
+        animate(panel, { opacity: [0, 1], y: [12, 0] }, { duration: 0.4, ease: [0.2, 0.7, 0.2, 1] });
+      }
+      const rect = panel.getBoundingClientRect();
+      if (rect.top > window.innerHeight * 0.7 || rect.top < 0) {
+        panel.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth', block: 'start' });
+      }
+    };
+
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        const id = b.dataset.choice!;
+        if (b.getAttribute('aria-expanded') === 'true') close(id);
+        else open(id);
+      }),
+    );
+
+    root.querySelectorAll<HTMLButtonElement>('[data-close-panel]').forEach((b) =>
+      b.addEventListener('click', () => {
+        const id = openId;
+        if (!id) return;
+        close(id);
+        root.querySelector<HTMLButtonElement>(`[data-choice="${id}"]`)!.focus();
+      }),
+    );
+
+    // Deep link like /#helping-parent opens that answer.
+    const fromHash = location.hash.replace('#', '');
+    if (buttons.some((b) => b.dataset.choice === fromHash)) open(fromHash);
+
+    let t: number | undefined;
+    window.addEventListener('resize', () => {
+      clearTimeout(t);
+      t = window.setTimeout(() => {
+        if (openId) place(document.getElementById(`panel-${openId}`)!, openId);
+      }, 150);
+    });
+  }
+</script>

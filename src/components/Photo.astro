@@ -1,0 +1,31 @@
+---
+import photos from '../data/photos.json';
+
+interface Props {
+  slug: string;
+  sizes?: string;
+  class?: string;
+  imgClass?: string;
+  eager?: boolean;
+  alt?: string; // override; pass "" for decorative
+}
+const { slug, sizes = '100vw', class: cls = '', imgClass = '', eager = false, alt } = Astro.props;
+const p = (photos as Record<string, { width: number; height: number; widths: number[]; alt: string }>)[slug];
+if (!p) throw new Error(`Unknown photo: ${slug}`);
+const set = (ext: string) => p.widths.map((w) => `/photos/${slug}-${w}.${ext} ${w}w`).join(', ');
+const fallbackW = p.widths.find((w) => w >= 1200) ?? p.widths[p.widths.length - 1];
+---
+<picture class={cls}>
+  <source type="image/avif" srcset={set('avif')} sizes={sizes} />
+  <source type="image/webp" srcset={set('webp')} sizes={sizes} />
+  <img
+    src={`/photos/${slug}-${fallbackW}.webp`}
+    width={p.width}
+    height={p.height}
+    alt={alt ?? p.alt}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding={eager ? 'sync' : 'async'}
+    fetchpriority={eager ? 'high' : undefined}
+    class={imgClass}
+  />
+</picture>

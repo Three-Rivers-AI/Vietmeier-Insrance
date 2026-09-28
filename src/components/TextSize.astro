@@ -1,0 +1,26 @@
+---
+// A / A+ / A++ control. Scales the root font size, so the whole site grows.
+// The saved choice is applied before paint by an inline script in Base.astro.
+interface Props { id: string; class?: string }
+const { id, class: cls = '' } = Astro.props;
+const sizes = [
+  { value: 'md', label: 'A', name: 'Normal text' },
+  { value: 'lg', label: 'A+', name: 'Larger text' },
+  { value: 'xl', label: 'A++', name: 'Largest text' },
+];
+---
+<div class={`text-size flex items-center gap-2 ${cls}`} role="group" aria-labelledby={`${id}-label`}>
+  <span id={`${id}-label`} class="text-[0.95rem] font-bold text-ink-soft">Text size</span>
+  <div class="flex rounded-full border-2 border-river/25 bg-white p-0.5">
+    {sizes.map((s, i) => (
+      <button
+        type="button"
+        data-size-btn={s.value}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        aria-label={s.name}
+        class="min-h-12 min-w-12 rounded-full px-2 font-bold text-river transition-colors aria-pressed:bg-river aria-pressed:text-white"
+        style={`font-size:${[1, 1.15, 1.3][i]}rem`}
+      >{s.label}</button>
+    ))}
+  </div>
+</div>

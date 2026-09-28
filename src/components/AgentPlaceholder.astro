@@ -1,0 +1,12 @@
+---
+// Obvious placeholder until the agent sends a real photo. Never swap in a stock face.
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<div class={`relative flex aspect-[4/5] w-full flex-col items-center justify-end overflow-hidden rounded-[var(--radius-soft)] bg-[linear-gradient(160deg,#EFE6D8,#E2D6C4)] shadow-[var(--shadow-card)] ${cls}`}>
+  <svg viewBox="0 0 200 220" class="w-[78%]" aria-hidden="true">
+    <circle cx="100" cy="78" r="44" fill="#CDBFA9" />
+    <path d="M20 220c6-58 40-88 80-88s74 30 80 88Z" fill="#CDBFA9" />
+  </svg>
+  <p class="absolute left-1/2 top-6 -translate-x-1/2 whitespace-nowrap rounded-full bg-paper px-4 py-1.5 text-[1rem] font-bold text-ink-soft ring-1 ring-line">Agent photo here</p>
+</div>

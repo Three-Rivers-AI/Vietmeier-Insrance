@@ -1,0 +1,106 @@
+---
+/*
+ * Medicare page. Facts checked 2026-09-28:
+ *   Parts A-D: https://www.medicare.gov/basics/get-started-with-medicare/medicare-basics/parts-of-medicare
+ *   Part D options: https://www.medicare.gov/health-drug-plans/part-d/basics
+ *   Enrollment periods: https://www.medicare.gov/basics/get-started-with-medicare/get-more-coverage/joining-a-plan
+ *   1-800-MEDICARE and TTY: https://www.medicare.gov/talk-to-someone
+ */
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import Timeline from '../components/Timeline.astro';
+import PlainAnswers from '../components/PlainAnswers.astro';
+import MedicareDisclaimer from '../components/MedicareDisclaimer.astro';
+import Icon from '../components/Icon.astro';
+
+const parts = [
+  { part: 'Part A', name: 'Hospital', body: 'Inpatient hospital stays, skilled nursing facility care, hospice and some home health care.' },
+  { part: 'Part B', name: 'Medical', body: 'Doctor visits, outpatient care, medical equipment and many preventive services.' },
+  { part: 'Part C', name: 'Medicare Advantage', body: 'A private plan approved by Medicare that bundles Parts A and B, and usually D.' },
+  { part: 'Part D', name: 'Drugs', body: 'Helps cover the cost of prescription drugs.' },
+];
+---
+<Base title="Medicare" description="Medicare Advantage and Part D drug plans explained in plain words by a local agent in McKees Rocks, PA.">
+  <PageHeader
+    eyebrow="Medicare"
+    title="Medicare, sorted out at your own table."
+    intro="Advantage or Original. Which drug plan. What changes this year. I lay it out plainly, compare the plans I carry, and you make the call."
+    photo="rowhouses"
+  />
+
+  <section class="py-10 md:py-14">
+    <div class="wrap">
+      <MedicareDisclaimer variant="box" />
+    </div>
+  </section>
+
+  <section class="section-pad pt-6 md:pt-8" aria-labelledby="parts-h">
+    <div class="wrap">
+      <div class="max-w-[42rem]" data-reveal>
+        <p class="eyebrow">The basics</p>
+        <h2 id="parts-h" class="mt-3">Four letters, in one line each.</h2>
+      </div>
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger role="list">
+        {parts.map((p) => (
+          <li class="card p-6">
+            <p class="font-serif text-[2rem] font-semibold text-clay-ink">{p.part}</p>
+            <h3 class="mt-1 text-[1.3rem]">{p.name}</h3>
+            <p class="mt-2">{p.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-pad bg-sage" aria-labelledby="roads-h">
+    <div class="wrap">
+      <div class="max-w-[44rem]" data-reveal>
+        <p class="eyebrow">Two roads</p>
+        <h2 id="roads-h" class="mt-3">Most people pick one of two ways to get their coverage.</h2>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-2" data-stagger>
+        <article class="card p-6 md:p-8">
+          <h3>Original Medicare, plus extras</h3>
+          <p class="mt-3">Parts A and B from Medicare. Many people add a Medigap policy to help with the costs Medicare leaves, and a Part D plan for drugs.</p>
+          <ul class="mt-5 grid gap-3">
+            <li class="flex gap-3"><Icon name="check" class="mt-1 shrink-0 text-river" /> See any doctor in the country who takes Medicare.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 shrink-0 text-river" /> Three pieces to keep track of instead of one.</li>
+          </ul>
+          <a href="/medigap" class="mt-6 inline-flex min-h-12 items-center gap-2 font-bold">How Medigap works <Icon name="arrow" size={20} /></a>
+        </article>
+        <article class="card p-6 md:p-8">
+          <h3>Medicare Advantage</h3>
+          <p class="mt-3">A private plan approved by Medicare that bundles hospital, medical and usually drug coverage into one card.</p>
+          <ul class="mt-5 grid gap-3">
+            <li class="flex gap-3"><Icon name="check" class="mt-1 shrink-0 text-river" /> One plan, often with extras like dental or vision.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 shrink-0 text-river" /> Usually a network, so we check your doctors first.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <Prose heading="When you can make a change." eyebrow="Timing">
+    <p>After your first sign-up, you are not locked in forever. These are the main windows.</p>
+    <ul>
+      <li><strong>October 15 to December 7.</strong> Open Enrollment. Switch Medicare Advantage or drug plans. Changes start January 1.</li>
+      <li><strong>January 1 to March 31.</strong> If you are in a Medicare Advantage plan, you can switch plans or go back to Original Medicare.</li>
+      <li><strong>Life changes.</strong> Moving, losing other coverage or getting help with drug costs can open a Special Enrollment Period.</li>
+    </ul>
+    <p>
+      Want to look on your own too? Good. Medicare's own tool is at <a href="https://www.medicare.gov/plan-compare/" rel="noopener">medicare.gov/plan-compare</a>, and you can call 1-800-MEDICARE (1-800-633-4227), TTY 1-877-486-2048, any time. I would rather you check than wonder.
+    </p>
+  </Prose>
+
+  <Prose heading="What a review with me looks like." eyebrow="How I help" tone="sage">
+    <ul>
+      <li><strong>We list what matters.</strong> Your doctors, pharmacy and medicines. Any trips you take.</li>
+      <li><strong>I compare the plans I carry.</strong> Side by side on paper, so you can see the tradeoffs.</li>
+      <li><strong>You decide.</strong> Today, next week or not at all. I write down what we covered either way.</li>
+    </ul>
+  </Prose>
+
+  <Timeline compact />
+  <PlainAnswers ids={['part-b-work', 'medigap-vs-advantage', 'change-later', 'part-d']} heading="Medicare questions, answered plainly." tone="sage" />
+</Base>

@@ -1,0 +1,54 @@
+---
+/*
+ * Medigap page. Facts checked 2026-09-28:
+ *   Works only with Original Medicare; cannot have both Medigap and MA:
+ *     https://www.medicare.gov/health-drug-plans/medigap/basics/how-medigap-works
+ *   6-month Medigap Open Enrollment from first month with Part B at 65+:
+ *     https://www.medicare.gov/health-drug-plans/medigap/basics
+ *   Medical underwriting outside that window, guaranteed issue rights:
+ *     https://www.medicare.gov/health-drug-plans/medigap/ready-to-buy
+ * Standardized lettered plans are a well-known feature but plan letters and prices are left out here on purpose.
+ */
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import PlainAnswers from '../components/PlainAnswers.astro';
+import MedicareDisclaimer from '../components/MedicareDisclaimer.astro';
+---
+<Base title="Medigap" description="Medigap, also called Medicare Supplement insurance, explained in plain words by a local agent in McKees Rocks, PA.">
+  <PageHeader
+    eyebrow="Medigap"
+    title="Medigap fills in the costs Original Medicare leaves behind."
+    intro="It is also called Medicare Supplement insurance. The timing of when you buy it matters more than most people are told."
+    photo="couple-walk"
+  />
+
+  <section class="py-10 md:py-14">
+    <div class="wrap"><MedicareDisclaimer variant="box" /></div>
+  </section>
+
+  <Prose heading="How it works." eyebrow="The basics">
+    <p>Original Medicare pays its share of a covered bill. A Medigap policy, sold by a private insurance company, helps pay some or all of what is left.</p>
+    <ul>
+      <li>You must have Original Medicare, Parts A and B, to buy one.</li>
+      <li>Medigap does not include drug coverage, so most people add a separate Part D plan.</li>
+      <li>You cannot have a Medigap policy and a Medicare Advantage plan at the same time.</li>
+    </ul>
+  </Prose>
+
+  <Prose heading="The six months that matter most." eyebrow="Timing" tone="sage">
+    <p>Your Medigap Open Enrollment Period lasts 6 months. It starts the first month you have Part B and are 65 or older.</p>
+    <p>During that window, companies cannot turn you down for health reasons. After it, in most cases, they can ask health questions and say no, unless you have a guaranteed issue right.</p>
+    <p><strong>So I bring it up early,</strong> even with people who are leaning toward Medicare Advantage. It is easier to decide with the whole picture in front of you.</p>
+  </Prose>
+
+  <Prose heading="What we look at together." eyebrow="How I help">
+    <ul>
+      <li>Which Medigap plans the companies I carry offer in your zip code.</li>
+      <li>How each company has handled price changes over time.</li>
+      <li>Which Part D plan fits your medicines alongside it.</li>
+    </ul>
+  </Prose>
+
+  <PlainAnswers ids={['medigap-vs-advantage', 'medigap-timing', 'change-later']} heading="Medigap questions, answered plainly." tone="sage" />
+</Base>

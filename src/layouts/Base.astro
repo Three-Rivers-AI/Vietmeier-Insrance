@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+import serifWoff2 from '@fontsource/source-serif-4/files/source-serif-4-latin-600-normal.woff2?url';
+import sansWoff2 from '@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2?url';
+import sansBoldWoff2 from '@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2?url';
+import DemoBanner from '../components/DemoBanner.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import TalkItThrough from '../components/TalkItThrough.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heroImage?: string; // preload path for the LCP image
+  closing?: boolean;
+}
+const { title, description, heroImage, closing = true } = Astro.props;
+const fullTitle = title === 'Home' ? 'Vietmeier Insurance | Medicare and life insurance in McKees Rocks, PA' : `${title} | Vietmeier Insurance, McKees Rocks`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <!-- Concept site: keep it out of search engines. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#1F4A45" />
+    <meta name="referrer" content="no-referrer" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={sansWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sansBoldWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifWoff2} as="font" type="font/woff2" crossorigin />
+    {heroImage && <link rel="preload" as="image" href={heroImage} type="image/avif" fetchpriority="high" />}
+    <script is:inline>
+      // Apply the saved text size before first paint.
+      try {
+        var s = localStorage.getItem('text-size');
+        if (s === 'lg' || s === 'xl') document.documentElement.dataset.size = s;
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="min-h-screen">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <DemoBanner />
+    <Header />
+    <main id="main" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    {closing && <TalkItThrough />}
+    <Footer />
+    <MobileCallBar />
+    <script>
+      import '../scripts/site.ts';
+    </script>
+  </body>
+</html>

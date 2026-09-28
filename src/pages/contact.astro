@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Base title="Contact" description="Call or book a 15-minute call with a local Medicare and life insurance agent in McKees Rocks, PA." closing={false}>
+  <PageHeader
+    eyebrow="Contact"
+    title="Book a 15-minute call. Or just pick up the phone."
+    intro="Tell me a good time and I will call you. Prefer to talk now? Call the number below and you will get me, or a voicemail I return [same business day]."
+  />
+  <section class="section-pad" aria-label="Ways to reach me">
+    <div class="wrap grid items-start gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
+      <div class="grid gap-5">
+        <a href={`tel:${site.phoneTel}`} class="card card-lift flex items-center gap-5 p-6 no-underline">
+          <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-river text-white"><Icon name="phone" size={28} /></span>
+          <span>
+            <span class="block text-[1rem] font-bold text-ink-soft">Call</span>
+            <span class="block text-[1.6rem] font-bold text-river underline underline-offset-4">{site.phoneShort}</span>
+          </span>
+        </a>
+        <div class="card flex items-start gap-5 p-6">
+          <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-sage text-river"><Icon name="map-pin" size={28} /></span>
+          <address>
+            <span class="block text-[1rem] font-bold text-ink-soft">Office</span>
+            {site.address}<br />{site.hours}
+          </address>
+        </div>
+        <div class="card flex items-start gap-5 p-6">
+          <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-sage text-river"><Icon name="home" size={28} /></span>
+          <p><span class="block text-[1rem] font-bold text-ink-soft">Home visits</span>Happy to come to your kitchen table anywhere in the western suburbs and the city.</p>
+        </div>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</Base>

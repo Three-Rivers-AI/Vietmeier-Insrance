@@ -1,0 +1,64 @@
+---
+import Icon from './Icon.astro';
+import Photo from './Photo.astro';
+
+const featured = [
+  {
+    href: '/medicare',
+    photo: 'paperwork',
+    title: 'Medicare Advantage and Part D',
+    body: 'Doctors, drugs and costs, compared side by side for the plans I carry.',
+  },
+  {
+    href: '/medigap',
+    photo: 'couple-walk',
+    title: 'Medigap',
+    body: 'Works with Original Medicare to help with the costs it leaves behind.',
+  },
+  {
+    href: '/life',
+    photo: 'grandparent',
+    title: 'Life insurance',
+    body: 'Final expenses, a mortgage, or something to leave the grandkids.',
+  },
+];
+const more = [
+  { href: '/annuities', icon: 'coins', title: 'Annuities', body: 'Turn part of your savings into a steady check.' },
+  { href: '/more-coverage', icon: 'hospital', title: 'Hospital indemnity and more', body: 'Cash toward a hospital stay, plus dental and vision.' },
+] as const;
+---
+<section class="section-pad bg-paper-deep/60" aria-labelledby="coverage-heading">
+  <div class="wrap">
+    <div class="max-w-[44rem]" data-reveal>
+      <p class="eyebrow">What I help with</p>
+      <h2 id="coverage-heading" class="mt-3">Medicare first. Then the rest of the picture.</h2>
+    </div>
+    <ul class="mt-10 grid gap-6 md:grid-cols-3" data-stagger role="list">
+      {featured.map((f) => (
+        <li>
+          <a href={f.href} class="card card-lift group flex h-full flex-col overflow-hidden no-underline">
+            <Photo slug={f.photo} sizes="(min-width: 48rem) 33vw, 100vw" class="block aspect-[4/3] overflow-hidden" imgClass="h-full w-full object-cover" alt="" />
+            <span class="flex flex-1 flex-col p-6">
+              <span class="font-serif text-[1.45rem] leading-snug font-semibold text-river underline decoration-transparent decoration-2 underline-offset-4 group-hover:decoration-current">{f.title}</span>
+              <span class="mt-2 text-ink">{f.body}</span>
+              <span class="mt-auto inline-flex items-center gap-2 pt-5 font-bold text-clay-ink underline underline-offset-4">Read more <Icon name="arrow" size={20} /></span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <ul class="mt-6 grid gap-6 md:grid-cols-2" data-stagger role="list">
+      {more.map((m) => (
+        <li>
+          <a href={m.href} class="card card-lift flex h-full items-start gap-5 p-6 no-underline">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-clay-wash text-clay-ink"><Icon name={m.icon} size={26} /></span>
+            <span>
+              <span class="block font-serif text-[1.35rem] font-semibold text-river underline decoration-2 underline-offset-4">{m.title}</span>
+              <span class="mt-1 block text-ink">{m.body}</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

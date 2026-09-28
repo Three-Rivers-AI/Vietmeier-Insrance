@@ -1,0 +1,26 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+import Photo from './Photo.astro';
+---
+<section class="relative isolate overflow-hidden bg-river-deep text-paper on-dark" aria-labelledby="hero-heading">
+  <div class="absolute inset-0 -z-10">
+    <Photo slug="hero" eager sizes="100vw" class="block h-full w-full" imgClass="hero-drift h-full w-full object-cover object-[60%_center]" />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgb(18_38_35/0.92)_0%,rgb(18_38_35/0.8)_45%,rgb(18_38_35/0.25)_100%)] max-md:bg-[linear-gradient(180deg,rgb(18_38_35/0.55)_0%,rgb(18_38_35/0.9)_55%,rgb(18_38_35/0.96)_100%)]"></div>
+  </div>
+  <div class="wrap flex min-h-[min(88vh,52rem)] flex-col justify-end pb-14 pt-48 md:justify-center md:py-28">
+    <div class="max-w-[40rem]">
+      <p class="fade-up inline-flex items-center gap-2 rounded-full bg-paper/12 px-4 py-1.5 text-[1rem] font-bold text-paper ring-1 ring-paper/30">
+        <Icon name="map-pin" size={18} /> Medicare and life insurance in McKees Rocks
+      </p>
+      <h1 id="hero-heading" class="fade-up fade-up-2 mt-5 text-paper">Medicare mail piling up? Bring it to the kitchen table.</h1>
+      <p class="fade-up fade-up-2 mt-5 max-w-[34rem] text-[1.25rem] text-paper/95 md:text-[1.375rem]">
+        One person. One phone number. No call centers. I sort through the options with you, in plain words, and you decide when you are ready.
+      </p>
+      <div class="fade-up fade-up-3 mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="#where-are-you" class="btn btn-light text-[1.2rem]">Where are you right now? <Icon name="arrow" /></a>
+        <a href={`tel:${site.phoneTel}`} class="btn btn-outline-light text-[1.2rem]"><Icon name="phone" /> {site.phoneShort}</a>
+      </div>
+    </div>
+  </div>
+</section>

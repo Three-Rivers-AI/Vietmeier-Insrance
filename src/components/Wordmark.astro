@@ -1,0 +1,17 @@
+---
+// Wordmark: three quiet river lines for Pittsburgh's rivers, plus the name.
+interface Props { light?: boolean }
+const { light = false } = Astro.props;
+---
+<a href="/" class:list={['group inline-flex min-h-12 items-center gap-3 no-underline', light ? 'text-paper' : 'text-river']}>
+  <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" class="shrink-0">
+    <rect width="40" height="40" rx="11" fill={light ? '#FAF6EF' : '#1F4A45'} />
+    <path d="M8 15c4-3 8-3 12 0s8 3 12 0" fill="none" stroke={light ? '#1F4A45' : '#FAF6EF'} stroke-width="2.4" stroke-linecap="round" />
+    <path d="M8 21c4-3 8-3 12 0s8 3 12 0" fill="none" stroke="#C8795A" stroke-width="2.4" stroke-linecap="round" />
+    <path d="M8 27c4-3 8-3 12 0s8 3 12 0" fill="none" stroke={light ? '#1F4A45' : '#FAF6EF'} stroke-width="2.4" stroke-linecap="round" />
+  </svg>
+  <span class="flex flex-col leading-none">
+    <span class="font-serif text-[1.5rem] font-semibold tracking-tight">Vietmeier</span>
+    <span class:list={['mt-1 text-[0.9rem] font-bold tracking-[0.06em] uppercase', light ? 'text-paper/90' : 'text-ink-soft']}>Insurance, McKees Rocks</span>
+  </span>
+</a>

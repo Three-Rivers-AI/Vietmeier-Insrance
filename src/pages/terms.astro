@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import MedicareDisclaimer from '../components/MedicareDisclaimer.astro';
+import { site } from '../data/site';
+---
+<Base title="Terms" description="Terms of use for the Vietmeier Insurance website.">
+  <PageHeader eyebrow="Terms" title="The plain terms of using this site." intro="Placeholder terms for a concept site. Have them reviewed before launch." />
+  <Prose heading="General information only.">
+    <p>This website explains insurance in general terms. It is not advice for your specific situation. Plan benefits, costs and availability vary by plan and by where you live. We can go over your own details on a call.</p>
+  </Prose>
+  <Prose heading="Who I am." tone="sage">
+    <p>{site.agentName} is a licensed insurance agent in Pennsylvania, license {site.license}, NPN {site.npn}. {site.agency} is not connected with or endorsed by the U.S. government or the federal Medicare program.</p>
+    <MedicareDisclaimer />
+  </Prose>
+  <Prose heading="Links to other sites.">
+    <p>This site links to Medicare.gov and other official sources so you can check things for yourself. I am not responsible for the content of those sites.</p>
+    <p>Last updated: [date].</p>
+  </Prose>
+</Base>
